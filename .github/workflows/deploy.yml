@@ -1,11 +1,12 @@
-name: Deploy qrcitos
+name: deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  web-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,15 +15,15 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
+
       - run: flutter pub get
-      - run: flutter build web
+      - run: flutter build web --web-renderer html
 
       - name: 🛥 Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.TOKEN }}
-          external_repository: cgutierr-zgz/cuantas-veces-ha-sonado-la-de-biza-y-quevedo
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
           user_name: cgutierr-zgz
           user_email: carlosgutimo.3d@gmail.com
