@@ -1,0 +1,29 @@
+name: Deploy qrcitos
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3.0.2
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter build web
+
+      - name: 🛥 Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.TOKEN }}
+          external_repository: cgutierr-zgz/cuantas-veces-ha-sonado-la-de-biza-y-quevedo
+          publish_dir: ./build/web
+          user_name: cgutierr-zgz
+          user_email: carlosgutimo.3d@gmail.com
+          publish_branch: master
