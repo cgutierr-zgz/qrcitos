@@ -222,6 +222,7 @@ class _QRCreatorState extends State<QRCreator> {
               onTap: () {
                 showDialog(
                   context: context,
+                  barrierColor: Colors.black.withOpacity(0.9),
                   builder: (context) {
                     return AlertDialog(
                       title: const Text('QR Code'),
