@@ -218,17 +218,35 @@ class _QRCreatorState extends State<QRCreator> {
                 ..addData(controller.text),
             );
 
-            return SizedBox.square(
-              dimension: 100,
-              child: PrettyQrView(
-                qrImage: qr,
-                // PrettyQrSmoothSymbol - PrettyQrRoundedSymbol
-                //decoration: PrettyQrDecoration(
-                //  shape: PrettyQrSmoothSymbol(
-                //      // color: _PrettyQrSettings.kDefaultQrDecorationBrush,
-                //      ),
-                //  //image: _PrettyQrSettings.kDefaultQrDecorationImage,
-                //),
+            return InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('QR Code'),
+                      content: SizedBox.square(
+                        dimension: 500,
+                        child: PrettyQrView(
+                          qrImage: qr,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              child: SizedBox.square(
+                dimension: 300,
+                child: PrettyQrView(
+                  qrImage: qr,
+                  // PrettyQrSmoothSymbol - PrettyQrRoundedSymbol
+                  //decoration: PrettyQrDecoration(
+                  //  shape: PrettyQrSmoothSymbol(
+                  //      // color: _PrettyQrSettings.kDefaultQrDecorationBrush,
+                  //      ),
+                  //  //image: _PrettyQrSettings.kDefaultQrDecorationImage,
+                  //),
+                ),
               ),
             );
           } catch (e) {
